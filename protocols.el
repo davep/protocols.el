@@ -1,6 +1,11 @@
 ;;; protocols.el --- Protocol database access functions.
-;; Copyright 2000,2001,2003 by Dave Pearson <davep@davep.org>
-;; $Revision: 1.5 $
+;; Copyright 2000-2017 by Dave Pearson <davep@davep.org>
+
+;; Author: Dave Pearson <davep@davep.org>
+;; Version: 1.5
+;; Keywords: convenience, net, protocols
+;; URL: https://github.com/davep/protocols.el
+;; Package-Requires: ((cl-lib "0.5"))
 
 ;; protocols.el is free software distributed under the terms of the GNU
 ;; General Public Licence, version 2. For details see the file COPYING.
@@ -41,7 +46,7 @@
 ;; Attempt to handle older/other emacs.
 
 (eval-and-compile
-  
+
   ;; If `line-beginning-position' isn't available provide one.
   (unless (fboundp 'line-beginning-position)
     (defun line-beginning-position (&optional n)
