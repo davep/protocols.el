@@ -33,26 +33,6 @@
 (eval-when-compile
   (require 'cl))
 
-;; Attempt to handle older/other emacs.
-
-(eval-and-compile
-
-  ;; If `line-beginning-position' isn't available provide one.
-  (unless (fboundp 'line-beginning-position)
-    (defun line-beginning-position (&optional n)
-      "Return the `point' of the beginning of the current line."
-      (save-excursion
-        (beginning-of-line n)
-        (point))))
-
-  ;; If `line-end-position' isn't available provide one.
-  (unless (fboundp 'line-end-position)
-    (defun line-end-position (&optional n)
-      "Return the `point' of the end of the current line."
-      (save-excursion
-        (end-of-line n)
-        (point)))))
-
 ;; Customisable variables.
 
 (defvar protocols-file "/etc/protocols"
