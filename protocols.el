@@ -66,11 +66,11 @@
     (list
      (car words)
      (string-to-number (cadr words))
-     (loop for s in (cddr words)
-           while (not (= (aref s 0) ?#))
-           collect s))))
+     (cl-loop for s in (cddr words)
+              while (not (= (aref s 0) ?#))
+              collect s))))
 
-(defun* protocols-read (&optional (file protocols-file))
+(cl-defun protocols-read (&optional (file protocols-file))
   "Read the protocol list from FILE.
 
 If FILE isn't supplied the value of `protocols-file' is used."
@@ -79,25 +79,25 @@ If FILE isn't supplied the value of `protocols-file' is used."
                               (with-temp-buffer
                                 (insert-file-contents file)
                                 (setf (point) (point-min))
-                                (loop until (eobp)
-                                      do (setf (point) (line-beginning-position))
-                                      unless (or (looking-at "^[ \t]*#") (looking-at "^[ \t]*$"))
-                                      collect (protocols-line-to-list (buffer-substring (line-beginning-position) (line-end-position)))
-                                      do (forward-line)))))))
+                                (cl-loop until (eobp)
+                                         do (setf (point) (line-beginning-position))
+                                         unless (or (looking-at "^[ \t]*#") (looking-at "^[ \t]*$"))
+                                         collect (protocols-line-to-list (buffer-substring (line-beginning-position) (line-end-position)))
+                                         do (forward-line)))))))
 
-(defun* protocols-find-by-name (name &optional (protocols (protocols-read)))
+(cl-defun protocols-find-by-name (name &optional (protocols (protocols-read)))
   "Find the protocol whose name is NAME."
   (assoc name protocols))
 
-(defun* protocols-find-by-number (number &optional (protocols (protocols-read)))
+(cl-defun protocols-find-by-number (number &optional (protocols (protocols-read)))
   "Find the protocol whose number is NUMBER."
-  (loop for protocol in protocols
-        when (= (proto-number protocol) number) return protocol))
+  (cl-loop for protocol in protocols
+           when (= (proto-number protocol) number) return protocol))
 
-(defun* protocols-find-by-alias (alias  &optional (protocols (protocols-read)))
+(cl-defun protocols-find-by-alias (alias  &optional (protocols (protocols-read)))
   "Find the protocol that has an alias of ALIAS."
-  (loop for protocol in protocols
-        when (member alias (proto-aliases protocol)) return protocol))
+  (cl-loop for protocol in protocols
+           when (member alias (proto-aliases protocol)) return protocol))
 
 ;;;###autoload
 (defun protocols-lookup (search)
@@ -106,10 +106,10 @@ If FILE isn't supplied the value of `protocols-file' is used."
                 (completing-read "Protocol search: "
                                  (or protocols-name-cache
                                      (setq protocols-name-cache
-                                           (loop for protocol in (protocols-read)
-                                                 collect (list (proto-name protocol))
-                                                 append (loop for alias in (proto-aliases protocol)
-                                                              collect (list alias))))))))
+                                           (cl-loop for protocol in (protocols-read)
+                                                    collect (list (proto-name protocol))
+                                                    append (cl-loop for alias in (proto-aliases protocol)
+                                                                    collect (list alias))))))))
   (let* ((protocols (protocols-read))
          (protocol (or (when (string-match "^[0-9]+$" search)
                          (protocols-find-by-number (string-to-number search) protocols))
@@ -124,8 +124,8 @@ If FILE isn't supplied the value of `protocols-file' is used."
                  (proto-name protocol)
                  (proto-number protocol)
                  (with-output-to-string
-                     (loop for alias in (proto-aliases protocol)
-                           do (princ alias) (princ " "))))
+                     (cl-loop for alias in (proto-aliases protocol)
+                              do (princ alias) (princ " "))))
       (error "Can't find a protocol matching \"%s\"" search))))
 
 ;;;###autoload
