@@ -31,7 +31,7 @@
 ;; Things we need:
 
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-lib))
 
 ;; Customisable variables.
 
