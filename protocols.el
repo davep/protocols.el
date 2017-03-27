@@ -65,7 +65,7 @@
   (let ((words (split-string line)))
     (list
      (car words)
-     (string-to-int (cadr words))
+     (string-to-number (cadr words))
      (loop for s in (cddr words)
            while (not (= (aref s 0) ?#))
            collect s))))
@@ -112,7 +112,7 @@ If FILE isn't supplied the value of `protocols-file' is used."
                                                               collect (list alias))))))))
   (let* ((protocols (protocols-read))
          (protocol (or (when (string-match "^[0-9]+$" search)
-                         (protocols-find-by-number (string-to-int search) protocols))
+                         (protocols-find-by-number (string-to-number search) protocols))
                        (protocols-find-by-name search protocols)
                        (protocols-find-by-name (downcase search) protocols)
                        (protocols-find-by-name (upcase search) protocols)
