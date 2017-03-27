@@ -26,16 +26,6 @@
 ;;   also wanted them to be totally independant of each other. Suggestions
 ;;   of how to sweetly remedy this situation are welcome.
 
-;;; INSTALLATION:
-;;
-;; o Drop protocols.el somwehere into your `load-path'. Try your site-lisp
-;;   directory for example (you might also want to byte-compile the file).
-;;
-;; o Add the following autoload statement to your ~/.emacs file:
-;;
-;;   (autoload 'protocols-lookup      "protocols" "Perform a protocol lookup" t)
-;;   (autoload 'protocols-clear-cache "protocols" "Clear the protocols cache" t)
-
 ;;; Code:
 
 ;; Things we need:
