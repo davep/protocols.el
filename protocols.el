@@ -17,7 +17,7 @@
 ;;
 ;; The latest protocols.el is always available from:
 ;;
-;;   <URL:http://www.davep.org/emacs/#protocols.el>
+;;   <URL:https://github.com/davep/protocols.el>
 
 ;;; BUGS:
 ;;
