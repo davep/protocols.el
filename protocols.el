@@ -101,7 +101,7 @@ If FILE isn't supplied the value of `protocols-file' is used."
 
 ;;;###autoload
 (defun protocols-lookup (search)
-  "Find a protocol and display its details."
+  "Find a protocol SEARCH and display its details."
   (interactive (list
                 (completing-read "Protocol search: "
                                  (or protocols-name-cache
@@ -137,4 +137,4 @@ If FILE isn't supplied the value of `protocols-file' is used."
 
 (provide 'protocols)
 
-;;; protocols.el ends here.
+;;; protocols.el ends here
